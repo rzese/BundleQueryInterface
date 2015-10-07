@@ -18,6 +18,7 @@
    if(request.getParameter("typePProp")!=null)
        typeProp=request.getParameter("typeProp");
     
+   
    int i;
    
   if(request.getParameter("status")==null)

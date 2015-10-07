@@ -264,6 +264,7 @@ public class BundleQueryManagement
         
         OWLDataFactory factory=rootOntology.getOWLOntologyManager().getOWLDataFactory();
         
+        
         try{
             if(qSelected.getCommand().equals("unsat"))
                 q=bundle.computeQuery(factory.getOWLSubClassOfAxiom((OWLClassExpression)oclasses.get(classa), OWL.Nothing));
