@@ -147,15 +147,16 @@
             </form>
                 
                 <%if(BundleQueryManagement.getStatus().equals("execute")){%>
-                       
+               
+                <div class="resQuery">
                 <table class="tabResultQuery">
                     <tr>
                         <td>Query Selected: </td>
-                        <td><%=BundleQueryManagement.getQuerySel()%></td>
+                        <td class="qsel"><%=BundleQueryManagement.getQuerySel()%></td>
                     </tr>
                     
                     <%if(prop>-1)
-                        if(typeProp.equals("Objecte"))
+                        if(typeProp.equals("Object"))
                             {%>
                                 <tr>
                                 <td>Property: </td>
@@ -203,11 +204,15 @@
                     
                     <tr>
                         <td></td>
-                        <td><input type="button" value="New Query" onclick="cleaning()" /></td>
+                        <td>
+                            <div class="but">
+                                <input type="button" class="button" value="New Query" onclick="cleaning()" />
+                            </div>
+                        </td>
                     </tr>
                     
                 </table>
-                                       
+                </div>                       
                     <%} else 
                         if(BundleQueryManagement.getStatus().equals("view")){%>
                     
@@ -328,7 +333,7 @@
                     </tr>
                      <%}%>
                         <!--Query Individual -->
-                     <%if(BundleQueryManagement.getQSelected().getNeedIndividual()!=0){%>   
+                     <%if((BundleQueryManagement.getQSelected().getNeedIndividual()!=0)||(typeProp!=null)){%>   
                     <tr>    
                         <td><label>Select individual I: </label>
                             <select name="indi">
@@ -344,7 +349,7 @@
                         </td>
                     </tr> 
                  
-                    <%if(BundleQueryManagement.getQSelected().getNeedIndividual()==2){%>
+                    <%if((BundleQueryManagement.getQSelected().getNeedIndividual()==2)||((typeProp!=null)&&(typeProp.equals("Object")))){%>
                     <tr>
                         <td><label>Select Individual S: </label>
                             <select name="inds">

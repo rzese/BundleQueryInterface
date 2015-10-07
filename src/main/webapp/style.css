@@ -112,27 +112,34 @@ padding-left: 150px;
 .tableelement tr td
 {font-size: 14px;
  font-family: sans-serif;
- padding: 20px 20px 20px 20px;   
+ padding: 20px 50px 20px 20px;   
 }
 
-.resultElement
+
+.tabResultQuery
+    {border-width: 0px;
+    padding-left: 150px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin: 10px 10px 10px 190px; 
+
+    }
+    
+ .tabResultQuery tr td
+    {font-size: 14px;
+     font-family: sans-serif;
+     padding: 20px 40px 20px 20px;  
+    }
+
+.tabResultQuery tr td.qsel
+    {font-size: 16px;
+     font-weight: bold;
+     font-family: sans-serif;
+    }
+    
+.resQuery
     {padding-left: 150px;
     padding-bottom: 20px;
     padding-top: 20px;
-    margin: 10px 10px 10px 10px; 
-    
-    }
-    
-.query
-    {font-size: 18px;
-    font-weight:  bold;
-    color: #003333;
-    font-family: sans-serif;
-    }
-
-.selectedEl
-    {font-size: 14px;
-    color: #003333;
-    font-family: sans-serif;
-
+    margin: 10px 10px 10px 10px;     
     }
