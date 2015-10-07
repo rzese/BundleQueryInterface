@@ -147,7 +147,7 @@ public class BundleQueryManagement
             oindividuals=new ArrayList<OWLNamedIndividual>();
             individuals=new ArrayList<String>();
             
-            if(qSelected.getNeedIndividual()!=0)
+            if((qSelected.getNeedIndividual()!=0)||(typeProp!=null))
                 {//crea lista individuals sia di Stringhe che OWL
                   for(Iterator<OWLNamedIndividual> it=rootOntology.getIndividualsInSignature().iterator();it.hasNext();)
                     {OWLNamedIndividual a=it.next();
@@ -199,8 +199,7 @@ public class BundleQueryManagement
             {e.printStackTrace(); 
             }    
         
-         oclasses=new ArrayList<OWLClass>();
-            classes=new ArrayList<String>();
+        
             
         createQuery();
        
@@ -210,45 +209,40 @@ public class BundleQueryManagement
                 {i++;
                 }
         qSelected=queries.get(i);    
+        
+         oclasses=new ArrayList<OWLClass>();
             
-            if(qSelected.getNeedClass()!=0)
+         if(qSelected.getNeedClass()!=0)
                 {//crea lista classi sia di Stringhe che OWL
-                    Iterator<OWLClass> it=null;
+                Iterator<OWLClass> it=null;
                 for(it=rootOntology.getClassesInSignature().iterator();it.hasNext();)
                     {OWLClass a=it.next();
                     oclasses.add(a);
-                    classes.add(BundleUtilities.getManchesterSyntaxString(a));
                     }
                 }
             
             oindividuals=new ArrayList<OWLNamedIndividual>();
-            individuals=new ArrayList<String>();
             
             if(qSelected.getNeedIndividual()!=0)
                 {//crea lista individuals sia di Stringhe che OWL
                   for(Iterator<OWLNamedIndividual> it=rootOntology.getIndividualsInSignature().iterator();it.hasNext();)
                     {OWLNamedIndividual a=it.next();
                     oindividuals.add(a);
-                    individuals.add(BundleUtilities.getManchesterSyntaxString(a));
                     }   
                 }
             
             odataprops=new ArrayList<OWLDataProperty>();
-            dataprops=new ArrayList<String>();
             oobjprops=new ArrayList<OWLObjectProperty>();
-            objprops=new ArrayList<String>();
             
             if(qSelected.getNeedProperty())
                 {//crea lista property (--> 2liste divise per data e object)sia di Stringhe che OWL
                  for(Iterator<OWLDataProperty> it=rootOntology.getDataPropertiesInSignature().iterator();it.hasNext();)
                     {OWLDataProperty a=it.next();
                     odataprops.add(a);
-                    dataprops.add(BundleUtilities.getManchesterSyntaxString(a));
-                    }  
+                     }  
                  for(Iterator<OWLObjectProperty> it=rootOntology.getObjectPropertiesInSignature().iterator();it.hasNext();)
                     {OWLObjectProperty a=it.next();
                     oobjprops.add(a);
-                    objprops.add(BundleUtilities.getManchesterSyntaxString(a));
                     }  
                 }
             
