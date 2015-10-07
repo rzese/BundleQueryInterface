@@ -129,32 +129,33 @@
                                   <%}
                               }%> 
                                       
-                               <%if(BundleQueryManagement.getClassa()!=0){%>
-                                <li>ClassA: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassa())%> </li>
-                               %}%> 
+                               <%if(BundleQueryManagement.getClassa()!=-1){%>
+                                <li>Class A: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassa())%> </li>
+                               <%}%> 
                                
-                               <%if(BundleQueryManagement.getClassb()!=0){%>
-                                <li>ClassB: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassb())%></li>
+                               <%if(BundleQueryManagement.getClassb()!=-1){%>
+                                <li>Class B: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassb())%></li>
                                <%}%> 
                                 
-                               <%if(BundleQueryManagement.getIndi()!=0){%>
-                                <li>IndividualI: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getIndi())%> </li>
+                               <%if(BundleQueryManagement.getIndi()!=-1){%>
+                                <li>Individual I: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getIndi())%> </li>
                                <%}%>
                                
-                                <%if(BundleQueryManagement.getInds()!=0){%>
-                                    <li>IndividualS: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getInds())%></li>
+                                <%if(BundleQueryManagement.getInds()!=-1){%>
+                                    <li>Individual S: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getInds())%></li>
                                 <%}%>
                                </ul>
                           </li> 
                           
-                          <li>
-                              <div class="but">
-                                <input type="button" class="button" value="Clear" onClick="cleaning()" />
-                              </div> 
-                          </li>
+                         
+                              
+                          
                        </ul>
+                       <div class="but">
+                                <input type="button" class="button" value="Clear" onClick="cleaning()" />
+                       </div> 
                                        
-                    <%}} else 
+                    <%} else 
                         if(BundleQueryManagement.getStatus().equals("view")){%>
                     
                  <form name="selectQuery" method="post" action="BundleQuery.jsp">
