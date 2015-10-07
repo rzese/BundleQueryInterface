@@ -147,12 +147,11 @@
             </form>
                 
                 <%if(BundleQueryManagement.getStatus().equals("execute")){%>
-               
-                <div class="resQuery">
+                       
                 <table class="tabResultQuery">
                     <tr>
                         <td>Query Selected: </td>
-                        <td class="qsel"><%=BundleQueryManagement.getQuerySel()%></td>
+                        <td><%=BundleQueryManagement.getQuerySel()%></td>
                     </tr>
                     
                     <%if(prop>-1)
@@ -204,15 +203,11 @@
                     
                     <tr>
                         <td></td>
-                        <td>
-                            <div class="but">
-                                <input type="button" class="button" value="New Query" onclick="cleaning()" />
-                            </div>
-                        </td>
+                        <td><input type="button" value="New Query" onclick="cleaning()" /></td>
                     </tr>
                     
                 </table>
-                </div>                       
+                                       
                     <%} else 
                         if(BundleQueryManagement.getStatus().equals("view")){%>
                     
@@ -294,10 +289,78 @@
                                 <input type="text" name="constant" />
                         </td>
                     </tr>
+                     <%}%>
+                     <%if(BundleQueryManagement.getTypeProp().equals("Object")){%>
+                    <tr>
+                        <td><label>Select Individual S: </label>
+                            <select name="inds">
+                                <%for(i=0;i<BundleQueryManagement.getIndividuals().size();i++){%>
+                                <option value="<%=i%>">
+                                            <%=BundleQueryManagement.getIndividuals(i)%>
+                                </option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr> 
+                    <%}%>
+                   
+                       <!--Query Classes -->
+                       <%if(BundleQueryManagement.getQSelected().getNeedClass()!=0){%>
+                       <tr>
+                           <td><label>Select classA: </label>
+                               
+                                <select name="classa">
+                                    <%for(i=0;i<BundleQueryManagement.getClasses().size();i++){%>
+                                    <option value="<%=i%>">
+                                        <%=BundleQueryManagement.getClasses(i)%>
+                                    </option>
+                                    <%}%>
+                                </select>
+                           </td>
+                           <td>
+                           </td>    
+                       </tr>
                     <%}%>
                     <%}
                      }%> 
-                        
+                       
+                     <!--Query Individual -->
+                     <%if(BundleQueryManagement.getQSelected().getNeedIndividual()!=0){%>   
+                    <tr>    
+                        <td><label>Select individual I: </label>
+                            <select name="indi">
+                                <%for(i=0;i<BundleQueryManagement.getIndividuals().size();i++){%>
+                                <option value="<%=i%>">
+                                            <%=BundleQueryManagement.getIndividuals(i)%>
+                                </option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr> 
+                 
+                    <%if(BundleQueryManagement.getQSelected().getNeedIndividual()==2){%>
+                    <tr>
+                        <td><label>Select Individual S: </label>
+                            <select name="inds">
+                                <%for(i=0;i<BundleQueryManagement.getIndividuals().size();i++){%>
+                                <option value="<%=i%>">
+                                            <%=BundleQueryManagement.getIndividuals(i)%>
+                                </option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr> 
+                    
+                    <%}}%>
                        <!--Query Classes -->
                        <%if(BundleQueryManagement.getQSelected().getNeedClass()!=0){%>
                        <tr>
@@ -332,40 +395,7 @@
                            </td>
                     </tr>
                      <%}%>
-                        <!--Query Individual -->
-                     <%if((BundleQueryManagement.getQSelected().getNeedIndividual()!=0)||(typeProp!=null)){%>   
-                    <tr>    
-                        <td><label>Select individual I: </label>
-                            <select name="indi">
-                                <%for(i=0;i<BundleQueryManagement.getIndividuals().size();i++){%>
-                                <option value="<%=i%>">
-                                            <%=BundleQueryManagement.getIndividuals(i)%>
-                                </option>
-                                <%}%>
-                            </select>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr> 
-                 
-                    <%if((BundleQueryManagement.getQSelected().getNeedIndividual()==2)||((typeProp!=null)&&(typeProp.equals("Object")))){%>
-                    <tr>
-                        <td><label>Select Individual S: </label>
-                            <select name="inds">
-                                <%for(i=0;i<BundleQueryManagement.getIndividuals().size();i++){%>
-                                <option value="<%=i%>">
-                                            <%=BundleQueryManagement.getIndividuals(i)%>
-                                </option>
-                                <%}%>
-                            </select>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr> 
-                    
-                    <%}}%>
+                        
                      
                         <input type="hidden" name="status" value="execute" />
                         <input type="hidden" name="ontology" value="<%=BundleQueryManagement.getOntology()%>" />

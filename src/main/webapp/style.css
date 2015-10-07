@@ -115,21 +115,18 @@ padding-left: 150px;
  padding: 20px 50px 20px 20px;   
 }
 
-
+.resQuery
+    {margin-left: 150px;
+     padding-left: 20px;
+    }
 .tabResultQuery
-    {border-width: 0px;
-    padding-left: 150px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    margin: 10px 10px 10px 190px; 
-
+    {
     }
     
  .tabResultQuery tr td
-    {font-size: 14px;
-     font-family: sans-serif;
-     padding: 20px 40px 20px 20px;  
-    }
+ {
+     
+ }
 
 .tabResultQuery tr td.qsel
     {font-size: 16px;
@@ -137,9 +134,3 @@ padding-left: 150px;
      font-family: sans-serif;
     }
     
-.resQuery
-    {padding-left: 150px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    margin: 10px 10px 10px 10px;     
-    }

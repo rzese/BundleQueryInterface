@@ -147,7 +147,7 @@ public class BundleQueryManagement
             oindividuals=new ArrayList<OWLNamedIndividual>();
             individuals=new ArrayList<String>();
             
-            if((qSelected.getNeedIndividual()!=0)||(typeProp!=null))
+            if(qSelected.getNeedIndividual()!=0)
                 {//crea lista individuals sia di Stringhe che OWL
                   for(Iterator<OWLNamedIndividual> it=rootOntology.getIndividualsInSignature().iterator();it.hasNext();)
                     {OWLNamedIndividual a=it.next();
@@ -199,7 +199,8 @@ public class BundleQueryManagement
             {e.printStackTrace(); 
             }    
         
-        
+         oclasses=new ArrayList<OWLClass>();
+            classes=new ArrayList<String>();
             
         createQuery();
        
@@ -209,40 +210,45 @@ public class BundleQueryManagement
                 {i++;
                 }
         qSelected=queries.get(i);    
-        
-         oclasses=new ArrayList<OWLClass>();
             
-         if(qSelected.getNeedClass()!=0)
+            if(qSelected.getNeedClass()!=0)
                 {//crea lista classi sia di Stringhe che OWL
-                Iterator<OWLClass> it=null;
+                    Iterator<OWLClass> it=null;
                 for(it=rootOntology.getClassesInSignature().iterator();it.hasNext();)
                     {OWLClass a=it.next();
                     oclasses.add(a);
+                    classes.add(BundleUtilities.getManchesterSyntaxString(a));
                     }
                 }
             
             oindividuals=new ArrayList<OWLNamedIndividual>();
+            individuals=new ArrayList<String>();
             
             if(qSelected.getNeedIndividual()!=0)
                 {//crea lista individuals sia di Stringhe che OWL
                   for(Iterator<OWLNamedIndividual> it=rootOntology.getIndividualsInSignature().iterator();it.hasNext();)
                     {OWLNamedIndividual a=it.next();
                     oindividuals.add(a);
+                    individuals.add(BundleUtilities.getManchesterSyntaxString(a));
                     }   
                 }
             
             odataprops=new ArrayList<OWLDataProperty>();
+            dataprops=new ArrayList<String>();
             oobjprops=new ArrayList<OWLObjectProperty>();
+            objprops=new ArrayList<String>();
             
             if(qSelected.getNeedProperty())
                 {//crea lista property (--> 2liste divise per data e object)sia di Stringhe che OWL
                  for(Iterator<OWLDataProperty> it=rootOntology.getDataPropertiesInSignature().iterator();it.hasNext();)
                     {OWLDataProperty a=it.next();
                     odataprops.add(a);
-                     }  
+                    dataprops.add(BundleUtilities.getManchesterSyntaxString(a));
+                    }  
                  for(Iterator<OWLObjectProperty> it=rootOntology.getObjectPropertiesInSignature().iterator();it.hasNext();)
                     {OWLObjectProperty a=it.next();
                     oobjprops.add(a);
+                    objprops.add(BundleUtilities.getManchesterSyntaxString(a));
                     }  
                 }
             
@@ -277,7 +283,7 @@ public class BundleQueryManagement
                 q=bundle.computeQuery(factory.getOWLSubClassOfAxiom((OWLClassExpression)oclasses.get(classa),(OWLClassExpression)oclasses.get(classb)));
             
             
-            if(qSelected.getCommand().equals("property-value"))
+            if(qSelected.getCommand().equals("property"))
                 {if(typeProp.equals("Object"))
                     q=bundle.computeQuery(factory.getOWLObjectPropertyAssertionAxiom((OWLObjectPropertyExpression)oobjprops.get(prop), (OWLIndividual)oindividuals.get(indi),(OWLIndividual)oindividuals.get(inds)));
                 if(typeProp.equals("Data"))
@@ -329,7 +335,7 @@ public class BundleQueryManagement
          Query q4=new Query("hierarchy","Print all explanations for the class hierarchy",1,0, false);
          Query q5=new Query("subclass","Explain why A class is a subClass of B class",2,0,false);
          Query q6=new Query("instance","Explain why I individual is an instance of A class",1,1, false);
-         Query q7=new Query("property","Explain why I individual has value S for property P",0,0,true);
+         Query q7=new Query("property","Explain why I individual has value S for property P",0,1,true);
          
         queries=new ArrayList<Query>();
         queries.add(q1);
