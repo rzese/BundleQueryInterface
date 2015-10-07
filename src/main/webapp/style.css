@@ -115,21 +115,23 @@ padding-left: 150px;
  padding: 20px 50px 20px 20px;   
 }
 
-.resQuery
-    {margin-left: 150px;
-     padding-left: 20px;
-    }
-.tabResultQuery
+.resquery
     {
+    }
+.tabResultQuery 
+    {padding-left: 200px;
+     margin-left: 20px;
     }
     
  .tabResultQuery tr td
- {
+ {//margin-left: 150px;
+   padding-right: 30px;  
      
  }
 
-.tabResultQuery tr td.qsel
+.tabResultQuery tr td p
     {font-size: 16px;
+     
      font-weight: bold;
      font-family: sans-serif;
     }

@@ -94,6 +94,63 @@
                 
                 //controlli
                 
+              /*  if(f.classa.value == "")
+                    {alert("No Class A selected!");
+                    return;
+                    }
+                    
+               if(f.classb.value == "")
+                    {alert("No Class B selected!");
+                    return;
+                    }
+               if(f.indi.value == "")
+                    {alert("No Individual I selected!");
+                    return;
+                    }
+                    
+               if(f.inds.value == "")
+                    {alert("No Individual S selected!");
+                    return;
+                    }
+                    
+               if(f.typeProp.value == "")
+                    {alert("No Type Property selected!");
+                    return;
+                    }
+                    
+               if(f.prop.value == "")
+                    {alert("No Property selected!");
+                    return;
+                    }
+                    
+               if(f.typeConstant.value == "")
+                    {alert("No Type Constant selected!");
+                    return;
+                    }
+               var typec=f.typeConstant.value;
+                if(f.constant.value == "")
+                            {alert("No Type Constant selected!");
+                            return;
+                            }
+                    else
+                        if((typec == "inte") || (typec == "floa") || (typec == "doub") )
+                            {if(!NaN(f.constant.value))
+                               {alert("Constant isn't a number!");
+                                return;
+                                } 
+                            }
+                            
+                       else
+                            {if(typec == "bool")
+                                    if((f.constant.value != "true") || (f.constant.value != "false"))
+                                            {alert("Constant must be true or false!");
+                                            return;
+                                            } 
+                            }
+                    
+              
+        */
+        
                 f.submit();
                 return;
 
@@ -147,11 +204,11 @@
             </form>
                 
                 <%if(BundleQueryManagement.getStatus().equals("execute")){%>
-                       
+                <div class="resquery"   >   
                 <table class="tabResultQuery">
                     <tr>
                         <td>Query Selected: </td>
-                        <td><%=BundleQueryManagement.getQuerySel()%></td>
+                        <td><p><%=BundleQueryManagement.getQuerySel()%></p></td>
                     </tr>
                     
                     <%if(prop>-1)
@@ -203,11 +260,15 @@
                     
                     <tr>
                         <td></td>
-                        <td><input type="button" value="New Query" onclick="cleaning()" /></td>
+                        <td>
+                            <div class="but">
+                            <input type="button" classs="button" value="New Query" onclick="cleaning()" />
+                            </div>
+                        </td>
                     </tr>
                     
                 </table>
-                                       
+                </div>                       
                     <%} else 
                         if(BundleQueryManagement.getStatus().equals("view")){%>
                     
