@@ -14,9 +14,38 @@
    String urlWebProtege="http://localhost:8080/webprotege-2.5.0";
 
    
-    String typeProp=null;
-   if(request.getParameter("typePProp")!=null)
+   String typeProp=null;
+   if(request.getParameter("typeProp")!=null)
        typeProp=request.getParameter("typeProp");
+   
+   int prop=-1;
+    if(request.getParameter("prop")!=null)
+       prop=Integer.valueOf(request.getParameter("prop"));
+    
+   String cst=null;
+   if(request.getParameter("constant")!=null)
+       cst=request.getParameter("constant"); 
+   String tcst=null;
+   if(request.getParameter("typeConstant")!=null)
+       tcst=request.getParameter("typeCostant");
+   
+   int cla=-1;
+   int clb=-1;
+   int ii=-1;
+   int is=-1;
+   
+    if(request.getParameter("classa")!=null)
+       cla=Integer.valueOf(request.getParameter("classa")); 
+    
+     if(request.getParameter("classb")!=null)
+       clb=Integer.valueOf(request.getParameter("classb")); 
+     
+     if(request.getParameter("indi")!=null)
+       ii=Integer.valueOf(request.getParameter("indi")); 
+   
+    if(request.getParameter("inds")!=null)
+       is=Integer.valueOf(request.getParameter("inds")); 
+   
     
    
    int i;
@@ -118,42 +147,66 @@
             </form>
                 
                 <%if(BundleQueryManagement.getStatus().equals("execute")){%>
-                       <ul class="resultElement">      
-                           
-                           <li class="query">Query Selected: <%=BundleQueryManagement.getQuerySel()%> 
-                               <ul>
-                              <%if(BundleQueryManagement.getTypeProp()!=null){%>
-                                    <li>Property: <%=BundleQueryManagement.getDataProps(BundleQueryManagement.getProp())%> </li>
-                                  <%if(BundleQueryManagement.getTypeConstant()!=null){%>
-                                    <li>Constant: <%=BundleQueryManagement.getConstant()%> </li>
-                                  <%}
-                              }%> 
-                                      
-                               <%if(BundleQueryManagement.getClassa()<=-1){%>
-                                <li>Class A: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassa())%> </li>
-                               <%}%> 
-                               
-                               <%if(BundleQueryManagement.getClassb()<=-1){%>
-                                <li>Class B: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassb())%></li>
-                               <%}%> 
+                       
+                <table class="tabResultQuery">
+                    <tr>
+                        <td>Query Selected: </td>
+                        <td><%=BundleQueryManagement.getQuerySel()%></td>
+                    </tr>
+                    
+                    <%if(prop>-1)
+                        if(typeProp.equals("Objecte"))
+                            {%>
+                                <tr>
+                                <td>Property: </td>
+                                <td><%=BundleQueryManagement.getObjProps(prop)%></td>
+                                </tr>
+                            <%}
+                        else
+                            {%>
+                                <tr>
+                                <td>Property: </td>
+                                <td><%=BundleQueryManagement.getDataProps(prop)%></td>
+                                </tr>
                                 
-                               <%if(BundleQueryManagement.getIndi()<=-1){%>
-                                <li>Individual I: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getIndi())%> </li>
-                               <%}%>
-                               
-                                <%if(BundleQueryManagement.getInds()<=-1){%>
-                                    <li>Individual S: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getInds())%></li>
-                                <%}%>
-                               </ul>
-                          </li> 
-                          
-                         
-                              
-                          
-                       </ul>
-                       <div class="but">
-                                <input type="button" class="button" value="New Query" onClick="cleaning()" />
-                       </div> 
+                                <tr>
+                                <td>Constant: </td>
+                                <td><%=cst%>, <%=tcst%></td>
+                                </tr>
+                            <%}%>    
+                    
+                    <%if(cla>-1){%>
+                    <tr>
+                        <td>Class A: </td>
+                        <td><%=BundleQueryManagement.getClasses(cla)%></td>
+                    </tr>
+                    <%}%>
+                    <%if(clb>-1){%>
+                    <tr>
+                        <td>Class B: </td>
+                        <td><%=BundleQueryManagement.getClasses(clb)%></td>
+                    </tr>
+                    <%}%>
+                    
+                    <%if(ii>-1){%>
+                    <tr>
+                        <td>Individual I: </td>
+                        <td><%=BundleQueryManagement.getIndividuals(ii)%></td>
+                    </tr>
+                    <%}%>
+                    <%if(is>-1){%>
+                    <tr>
+                        <td>Individual S: </td>
+                        <td><%=BundleQueryManagement.getIndividuals(is)%></td>
+                    </tr>
+                    <%}%>
+                    
+                    <tr>
+                        <td></td>
+                        <td><input type="button" value="New Query" onclick="cleaning()" /></td>
+                    </tr>
+                    
+                </table>
                                        
                     <%} else 
                         if(BundleQueryManagement.getStatus().equals("view")){%>
