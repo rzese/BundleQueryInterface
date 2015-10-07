@@ -190,6 +190,7 @@ public class BundleQueryManagement
              String path=file.getAbsolutePath().replace("\\", "/");
             rootOntology=OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(IRI.create("file:///"+path));
             file.delete();
+            ontology=StringEscapeUtils.escapeHtml(ontology);
         }
         catch(IOException e) { 
             e.printStackTrace();
