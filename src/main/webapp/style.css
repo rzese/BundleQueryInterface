@@ -1,0 +1,138 @@
+/* 
+    Created on : 30-set-2015, 22.27.51
+    Author     : chiara
+*/
+.container
+{width: 90%;
+ height: 90%;
+ border-color: #003333;
+ background: url(images/sfondo.png)  ;
+ background-repeat: repeat-y;
+ border-width: 5px;
+
+ color: #003333;
+ padding: 30px 30px 30px 30px ;
+ margin: 30px 30px 30px 30px;
+}
+
+.titlePage
+{padding: 30px 30px 30px 30px ;
+ margin: 30px 30px 30px 30px;
+ color: aliceblue;   
+ font-family:sans serif;
+ font-size: 40px;
+}
+
+.bar
+{font-size: 30px;
+ background-color: #99ffff;
+ padding: 10px 10px 10px 10px ;
+  margin: 10px 10px 10px 10px ;
+  background-image: url(images/barground.jpg);
+  
+  border-radius: 10px;
+  
+ font-family: sans-serif;
+}
+
+.button
+{background-color: #ccccff;
+ font-size: 20px;
+ font-family:  sans serif;
+ border-radius: 6px;
+ border-style: solid;
+ border-width: 3px;   
+}
+
+.qContainer
+{ padding: 20px 20px 20px 20px ;
+  margin-left: 50px;
+   font-size: 20px; 
+   background-color: #ccccff;
+ font-family: sans-serif;
+ width: 85%;
+}
+
+.selQuery{
+   padding: 20px 20px 20px 20px ; 
+    font-size: 20px;
+    margin-left: 160px;
+    
+ font-family: sans-serif;
+}
+
+.elQuery
+{padding: 10px 20px 10px 20px ;
+ font-size: 20px;  
+ 
+ font-family: sans-serif;
+}
+
+.but
+{padding: 20px 20px 20px 20px ;
+  font-size: 20px;  
+  margin-left: 250px;
+}
+
+
+.resultContainer 
+{font-size: 20px;
+ font-family: sans-serif;
+padding:  20px 20px 10px 30px ;   
+margin-left:  150px ;  
+width: 65%;
+}
+.resultContainer label
+{font-size: 20px;
+ font-family: sans-serif;
+padding:  20px 20px 10px 20px ;  
+}
+
+.rect
+{font-size: 20px;
+ border-color: #003333;
+ border-width: 4px;
+ border-style:double;
+ padding: 20px 20px 20px 20px ;
+ background-color: #fff;
+}
+
+.rect p
+{margin-left: 90px;
+}
+
+.tableelement
+{border-width: 0px;
+padding-left: 150px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin: 10px 10px 10px 10px;     
+}
+
+.tableelement tr td
+{font-size: 14px;
+ font-family: sans-serif;
+ padding: 20px 20px 20px 20px;   
+}
+
+.resultElement
+    {padding-left: 150px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin: 10px 10px 10px 10px; 
+    
+    }
+    
+.query
+    {font-size: 18px;
+    font-weight:  bold;
+    color: #003333;
+    font-family: sans-serif;
+    }
+
+.selectedEl
+    {font-size: 14px;
+    color: #003333;
+    font-family: sans-serif;
+
+    }
