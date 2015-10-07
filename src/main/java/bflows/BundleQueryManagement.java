@@ -103,13 +103,9 @@ public class BundleQueryManagement
                 file=File.createTempFile("onto", ".owl");
                 FileWriter fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);
-              /* if(status!=null)
-                    bw.write(ontology);
-                else
-                    {*/bw.write(ontology);
-                    ontology=StringEscapeUtils.escapeHtml(ontology);
-                    status="view";
-                   // }
+                bw.write(ontology);
+                ontology=StringEscapeUtils.escapeHtml(ontology);
+               
                 bw.flush();
                 bw.close();
                 String path=file.getAbsolutePath().replace("\\", "/");

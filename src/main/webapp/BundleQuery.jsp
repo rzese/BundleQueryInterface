@@ -20,15 +20,15 @@
     
    int i;
    
-  
-   BundleQueryManagement.setStatus(request.getParameter("status"));
+  if(request.getParameter("status")==null)
+      BundleQueryManagement.setStatus("view");
+  else
+      BundleQueryManagement.setStatus(request.getParameter("status"));
    
-   if(BundleQueryManagement.getStatus()!=null)
-        if(BundleQueryManagement.getStatus().equals("execute"))
-            BundleQueryManagement.BundleQueryManagementExecute();
-   
-   
-   BundleQueryManagement.BundleQueryManagementView();
+  if(BundleQueryManagement.getStatus().equals("execute"))
+       BundleQueryManagement.BundleQueryManagementExecute();
+   else
+        BundleQueryManagement.BundleQueryManagementView();
    
    
 %>
@@ -101,7 +101,6 @@
             <form name="richarge" method="post" action="BundleQuery.jsp">
                 <input type="hidden" name="ontology" value="<%=BundleQueryManagement.getOntology()%>"/>
                 <input type="hidden" name="querySel" />
-                
                 <input type="hidden" name="status" value="view"/>
             </form>
                 <form name="richargeprop" method="post" action="BundleQuery.jsp">
@@ -308,7 +307,6 @@
                     
                     <%}}%>
                      
-                        <input type="hidden" name="qSelected" value="<%=BundleQueryManagement.getQSelected()%>" />
                         <input type="hidden" name="status" value="execute" />
                         <input type="hidden" name="ontology" value="<%=BundleQueryManagement.getOntology()%>" />
                      </form> 
@@ -336,7 +334,11 @@
             <div class="resultContainer">
                 <label>Results: </label>
                 <div class="rect">
+                  <%if(BundleQueryManagement.getResult()==null){%>  
+                    <p></p>
+                  <%} else {%>  
                     <p> <%=BundleQueryManagement.getResult()%></p>
+                  <%}%>  
                 </div>    
             </div>
             
