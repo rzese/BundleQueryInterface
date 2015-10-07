@@ -129,19 +129,19 @@
                                   <%}
                               }%> 
                                       
-                               <%if(BundleQueryManagement.getClassa()!=-1){%>
+                               <%if(BundleQueryManagement.getClassa()<=-1){%>
                                 <li>Class A: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassa())%> </li>
                                <%}%> 
                                
-                               <%if(BundleQueryManagement.getClassb()!=-1){%>
+                               <%if(BundleQueryManagement.getClassb()<=-1){%>
                                 <li>Class B: <%=BundleQueryManagement.getClasses(BundleQueryManagement.getClassb())%></li>
                                <%}%> 
                                 
-                               <%if(BundleQueryManagement.getIndi()!=-1){%>
+                               <%if(BundleQueryManagement.getIndi()<=-1){%>
                                 <li>Individual I: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getIndi())%> </li>
                                <%}%>
                                
-                                <%if(BundleQueryManagement.getInds()!=-1){%>
+                                <%if(BundleQueryManagement.getInds()<=-1){%>
                                     <li>Individual S: <%=BundleQueryManagement.getIndividuals(BundleQueryManagement.getInds())%></li>
                                 <%}%>
                                </ul>
@@ -152,7 +152,7 @@
                           
                        </ul>
                        <div class="but">
-                                <input type="button" class="button" value="Clear" onClick="cleaning()" />
+                                <input type="button" class="button" value="New Query" onClick="cleaning()" />
                        </div> 
                                        
                     <%} else 
