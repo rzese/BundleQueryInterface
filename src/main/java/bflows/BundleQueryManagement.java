@@ -258,10 +258,10 @@ public class BundleQueryManagement
         
         Bundle bundle=bwc.getBundle();
         
-        
         bundle.loadOntologies(rootOntology);
         
-        bundle.setPMap();
+//        bundle.setPMap();
+        bundle.init();
         
         OWLDataFactory factory=rootOntology.getOWLOntologyManager().getOWLDataFactory();
         
