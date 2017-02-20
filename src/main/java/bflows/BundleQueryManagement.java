@@ -307,6 +307,12 @@ public class BundleQueryManagement {
             if (qSelected.getCommand().equals("inconsistent")) {
                 q = bundle.computeQuery(factory.getOWLSubClassOfAxiom(OWL.Thing, OWL.Nothing));
             }
+            
+            BigDecimal prob = q.getQueryProbability();
+            Set<Set<OWLAxiom>> explanations = q.getExplanations();
+            long timeInMillisecs = q.getTimers().mainTimer.getTotal();
+            
+            
 
             result = bwc.finish(q);
             bundle.disposeBDDFactory();
