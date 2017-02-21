@@ -9,9 +9,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import static net.sf.javabdd.BDDFactory.getProperty;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -31,6 +40,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLStorerFactory;
 import org.semanticweb.owlapi.util.OWLStorerFactoryImpl;
+import unife.bundle.bdd.BDDFactory2;
+import unife.bundle.bdd.LoadNativeLibrary;
 import unife.bundle.utilities.BundleUtilities;
 
 /**
@@ -93,11 +104,12 @@ public class BundleQueryManagement {
     public void BundleQueryManagementView() {//gestione restituzione OWLOntology
 
         File file;
+        BufferedWriter bw = null;
         try {
 
             file = File.createTempFile("onto", ".owl");
             FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
+            bw = new BufferedWriter(fw);
             bw.write(ontology);
 //                bw.write("pippo baudo");
             ontology = StringEscapeUtils.escapeHtml(ontology);
@@ -107,13 +119,61 @@ public class BundleQueryManagement {
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
             rootOntology = manager.loadOntologyFromOntologyDocument(IRI.create("file://" + path));
             file.delete();
-
-        } catch (IOException e) {
+//            file = File.createTempFile("currDir", ".txt");
+//            fw = new FileWriter(file);
+//            bw = new BufferedWriter(fw);
+//            bw.write(System.getProperty("user.dir"));
+//            bw.close();
+//            String currDir = getProperty("user.dir", ".") + getProperty("file.separator", "/");
+//            String pack = "/bdd-libraries/lib";
+//            URL f = BDDFactory2.class.getResource(pack);
+//            String libraryDir = f.getFile();
+//            file = File.createTempFile("infos", ".txt");
+//            fw = new FileWriter(file);
+//            bw = new BufferedWriter(fw);
+//            bw.write("curDir: " + currDir + "\n");
+//            bw.write("curDir2: " + System.getProperty("user.dir") + "\n");
+//            bw.write("libraryDir: " + libraryDir + "\n");
+//
+//            String jarPath = libraryDir.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+//            bw.write("JarPath: " + jarPath + "\n");
+//            JarFile jarFile = new JarFile(jarPath);
+//            Enumeration<JarEntry> entries = jarFile.entries();
+//            while (entries.hasMoreElements()) {
+//                JarEntry entry = entries.nextElement();
+//                String entryName = "/" + entry.getName();
+//                bw.write("Jar entry: " + entry.getName() + "\n");
+//                bw.flush();
+//                String ext;
+//                if (System.getProperty("os.name").startsWith("Windows")) {
+//                    ext = ".dll";
+//                } else if (System.getProperty("os.name").startsWith("Linux")) {
+//                    ext = ".so";
+//                } else if (System.getProperty("os.name").startsWith("Mac OS X")) {
+//                    ext = ".jnilib";
+//                } else {
+//                    throw new RuntimeException("Unknown Operating System");
+//                }
+//                if (entryName.startsWith(pack)
+//                        && entryName.length() > (pack.length() + "/".length())
+//                        && entryName.substring(entryName.length() - ext.length()).equals(ext)) {
+//                    bw.write("entryName: " + entryName + " starts with " + pack + "\n");
+//                    bw.flush();
+////                    String libFile = LoadNativeLibrary.createTempFile(entryName, currDir).getName();
+//                    String libFile = createTempFile(entryName, currDir, bw).getName();
+//                    File createdLibFile = new File(libFile);
+//                    if (!createdLibFile.exists()) {
+//                        bw.write("Library file: " + libFile + " does not exist");
+//                    }
+//                }
+//            }
+//            bw.close();
+        } catch (IOException e) {  
             e.printStackTrace();
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
-        }
-
+        } 
+        
         createQuery();
 
         if (querySel != null) {
@@ -247,6 +307,7 @@ public class BundleQueryManagement {
         bundle.loadOntologies(rootOntology);
 
 //        bundle.setPMap();
+//        bundle.setBddFType(BDDFactoryType.J);
         bundle.init();
 
         OWLDataFactory factory = rootOntology.getOWLOntologyManager().getOWLDataFactory();
@@ -566,4 +627,76 @@ public class BundleQueryManagement {
         this.result = result;
 
     }
+
+    public static File createTempFile(String path, String directory, BufferedWriter bw) throws IOException {
+        if (!path.startsWith("/")) {
+            throw new IllegalArgumentException("The path has to be absolute (start with '/').");
+        }
+
+        // Obtain basename from path
+        String baseName = FilenameUtils.getBaseName(path);
+        // Obtain extension from path
+        String ext = "." + FilenameUtils.getExtension(path);
+
+        // Check if the basename is okay
+        if (baseName.isEmpty()) {
+            throw new IllegalArgumentException("The filename is an empty string");
+        }
+        if (baseName.length() < 3) {
+            throw new IllegalArgumentException("The filename has to be at least 3 characters long.");
+        }
+
+        // Prepare temporary file
+        File dir = null;
+        if (directory != null) {
+            dir = new File(directory);
+            if (!dir.isDirectory()) {
+                throw new IOException(dir.getAbsolutePath() + " is not a directory");
+            }
+        }
+//        File tempFile = File.createTempFile(baseName, ext, dir);
+        File tempFile = new File(System.getProperty("user.dir") + "/" + baseName + ext);
+        bw.write("outputfile: " + tempFile.getAbsolutePath() + "\n");
+        bw.flush();
+        try {
+        tempFile.createNewFile();
+        bw.write("file created");
+        bw.flush();
+        tempFile.deleteOnExit();
+        bw.write("delete on exit");
+        bw.flush();
+        } catch(IOException e) {
+            bw.write(e.getMessage()+ "\n");
+            bw.close();
+        }
+
+        if (!tempFile.exists()) {
+            throw new FileNotFoundException("File " + tempFile.getAbsolutePath() + " does not exist.");
+        }
+
+        // Prepare buffer for data copying
+        byte[] buffer = new byte[4096];
+        int readBytes;
+
+        // Open and check input stream
+        URL t = LoadNativeLibrary.class.getResource(path);
+        InputStream is = LoadNativeLibrary.class.getResourceAsStream(path);
+        if (is == null) {
+            throw new FileNotFoundException("File " + path + " was not found inside JAR.");
+        }
+
+        // Open output stream and copy data between source file in JAR and the temporary file
+        OutputStream os = new FileOutputStream(tempFile);
+        try {
+            while ((readBytes = is.read(buffer)) != -1) {
+                os.write(buffer, 0, readBytes);
+            }
+        } finally {
+            // If read/write fails, close streams safely before throwing an exception
+            os.close();
+            is.close();
+        }
+        return tempFile;
+    }
+
 }
