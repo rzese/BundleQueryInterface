@@ -1,6 +1,7 @@
 package bflows;
 
 import java.util.*;
+
 import blogics.*;
 import com.clarkparsia.owlapiv3.OWL;
 import unife.bundle.*;
@@ -32,6 +33,9 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLStorerFactory;
 import org.semanticweb.owlapi.util.OWLStorerFactoryImpl;
 import unife.bundle.utilities.BundleUtilities;
+import java.math.BigDecimal;
+import org.semanticweb.owlapi.model.OWLAxiom;
+
 
 /**
  *
@@ -86,6 +90,10 @@ public class BundleQueryManagement {
     private String status;
 
     private String result;
+    
+    private BigDecimal prob;
+    private Set<Set<OWLAxiom>> explanations;
+    private long timeInMillisecs;
 
     public BundleQueryManagement() {
     }
@@ -308,9 +316,9 @@ public class BundleQueryManagement {
                 q = bundle.computeQuery(factory.getOWLSubClassOfAxiom(OWL.Thing, OWL.Nothing));
             }
             
-            BigDecimal prob = q.getQueryProbability();
-            Set<Set<OWLAxiom>> explanations = q.getExplanations();
-            long timeInMillisecs = q.getTimers().mainTimer.getTotal();
+            prob = q.getQueryProbability();
+            explanations = q.getExplanations();
+            timeInMillisecs = q.getTimers().mainTimer.getTotal();
             
             
 
@@ -572,4 +580,18 @@ public class BundleQueryManagement {
         this.result = result;
 
     }
+
+    public BigDecimal getProb() {
+    	return this.prob;
+    }
+    
+    public Set<Set<OWLAxiom>> getExpl(int index) {
+    	return this.explanations(index);
+    }
+    
+    public long getTime() {
+    	return this.timeInMillisecs;
+    }
+    
+    
 }
